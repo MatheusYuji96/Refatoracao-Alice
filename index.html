@@ -1,52 +1,124 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <h2>Cadastro de notas da Prof. Alice</h2>
-
-    Digite aqui o nome do aluno: <br>
-    <input type="text" id="iptNome"> <br>
-    Nota 1: <br>
-    <input type="text" id="iptNota1"> <br>
-    Nota 2: <br>
-    <input type="text" id="iptNota2"> <br>
-    Nota 3: <br>
-    <input type="text" id="iptNota3"> <br>
-    <button onclick="cadastrar()">Cadastrar</button> <br>
-    <button onclick="listar()">Listar</button>
-    <button onclick="media()">Media</button>
-
-    <div id="listar"></div>
-
-</body>
-
-</html>
 <script>
-    // let vt_nomes = [];
-    // let vt_nota1 = [];
-    // let vt_nota2 = [];
-    // let vt_nota3 = [];
 
-    vt_alunos = [];
+var vt_alunos = []; 
 
-    function cadastrar() {
-        let nome = iptNome.value;
-        let nota1 = Number(iptNota1.value);
-        let nota2 = Number(iptNota2.value);
-        let nota3 = Number(iptNota3.value);
+function cadastrar() {
+
+    erros.innerHTML = "";
+    var listaErros = "";
+
+    var nome = iptNome.value; // sem trim
+    var nota1 = Number(iptNota1.value);
+    var nota2 = Number(iptNota2.value);
+    var nota3 = Number(iptNota3.value);
 
 
-        // vt_nomes.push(nome);
-        // vt_nota1.push(nota1);
-        // vt_nota2.push(nota2);
-        // vt_nota3.push(nota3);
+    // ===== VALIDAÇÕES =====
 
-        console.log(aluno);
-
+    if (nome === "") {
+        listaErros += "• Nome não pode estar vazio.<br>";
     }
+
+    if (nome.length < 9) {
+        listaErros += "• Nome deve ter pelo menos 9 caracteres.<br>";
+    }
+
+    // duplicidade
+    for (var pos = 0; pos < vt_alunos.length; pos++) {
+        if (vt_alunos[pos].nome === nome) {
+            listaErros += "• Nome já cadastrado.<br>";
+        }
+    }
+
+    // validação SEM isNaN
+    if (iptNota1.value === "" || nota1 < 0) {
+        listaErros += "• Nota 1 inválida.<br>";
+    }
+
+    if (iptNota2.value === "" || nota2 < 0) {
+        listaErros += "• Nota 2 inválida.<br>";
+    }
+
+    if (iptNota3.value === "" || nota3 < 0) {
+        listaErros += "• Nota 3 inválida.<br>";
+    }
+
+    if (listaErros !== "") {
+        erros.innerHTML = listaErros;
+        return;
+    }
+
+    vt_alunos.push({
+        nome: nome,
+        nota1: nota1,
+        nota2: nota2,
+        nota3: nota3
+    });
+
+    erros.innerHTML = "Aluno cadastrado com sucesso!";
+}
+
+function listar() {
+
+    saida.innerHTML = "";
+
+    if (vt_alunos.length === 0) {
+        saida.innerHTML = "Nenhum aluno cadastrado.";
+        return;
+    }
+
+    var ordem = prompt("Digite 1 para listar do primeiro ao último.\nDigite 2 para listar do último ao primeiro.");
+
+    var inicio, fim, passo;
+
+    if (ordem == "1") {
+        inicio = 0;
+        fim = vt_alunos.length;
+        passo = 1;
+    } else if (ordem == "2") {
+        inicio = vt_alunos.length - 1;
+        fim = -1;
+        passo = -1;
+    } else {
+        saida.innerHTML = "Opção inválida.";
+        return;
+    }
+
+    for (var pos = inicio; pos != fim; pos += passo) {
+
+        var aluno = vt_alunos[pos];
+        var media = (aluno.nota1 + aluno.nota2 + aluno.nota3) / 3;
+
+        saida.innerHTML += 
+            `Aluno: ${aluno.nome}  N1: ${aluno.nota1}  N2: ${aluno.nota2}  N3: ${aluno.nota3}  Média: ${media.toFixed(1)}  Listagem<br>`;
+    }
+}
+
+function buscarAluno() {
+
+    saida.innerHTML = "";
+
+    if (vt_alunos.length === 0) {
+        saida.innerHTML = "Nenhum aluno cadastrado.";
+        return;
+    }
+
+    var nomeBusca = prompt("Digite o nome exato do aluno:");
+
+    for (var pos = 0; pos < vt_alunos.length; pos++) {
+        if (vt_alunos[pos].nome === nomeBusca) {
+
+            var aluno = vt_alunos[pos];
+            var media = (aluno.nota1 + aluno.nota2 + aluno.nota3) / 3;
+
+            saida.innerHTML = 
+                `Aluno: ${aluno.nome}  N1: ${aluno.nota1}  N2: ${aluno.nota2}  N3: ${aluno.nota3}  Média: ${media.toFixed(1)}  Consulta por aluno`;
+
+            return;
+        }
+    }
+
+    saida.innerHTML = "Aluno não encontrado.";
+}
+
+</script>

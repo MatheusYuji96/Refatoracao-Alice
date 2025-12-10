@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Cadastro de notas da Prof. Alice</h2>
+
+    Digite aqui o nome do aluno: <br>
+    <input type="text" id="iptNome"> <br>
+    Nota 1: <br>
+    <input type="text" id="iptNota1"> <br>
+    Nota 2: <br>
+    <input type="text" id="iptNota2"> <br>
+    Nota 3: <br>
+    <input type="text" id="iptNota3"> <br>
+    <button onclick="cadastrar()">Cadastrar</button> <br>
+    <button onclick="listar()">Listar</button>
+
+    <div id="listar"></div>
+
+</body>
+
+</html>
+<script>
+    // let vt_nomes = [];
+    // let vt_nota1 = [];
+    // let vt_nota2 = [];
+    // let vt_nota3 = [];
+
+    function cadastrar() {
+        let nome = iptNome.value;
+        let nota1 = Number(iptNota1.value);
+        let nota2 = Number(iptNota2.value);
+        let nota3 = Number(iptNota3.value);
+
+        var aluno = {
+            nome: nome,
+            nota1: nota1,
+            nota2: nota2,
+            nota3: nota3
+        }
+
+        // vt_nomes.push(nome);
+        // vt_nota1.push(nota1);
+        // vt_nota2.push(nota2);
+        // vt_nota3.push(nota3);
+
+        console.log(aluno);
+
+    }
+
+</script>

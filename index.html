@@ -20,6 +20,7 @@
     <input type="text" id="iptNota3"> <br>
     <button onclick="cadastrar()">Cadastrar</button> <br>
     <button onclick="listar()">Listar</button>
+    <button onclick="media()">Media</button>
 
     <div id="listar"></div>
 
@@ -32,18 +33,14 @@
     // let vt_nota2 = [];
     // let vt_nota3 = [];
 
+    vt_alunos = [];
+
     function cadastrar() {
         let nome = iptNome.value;
         let nota1 = Number(iptNota1.value);
         let nota2 = Number(iptNota2.value);
         let nota3 = Number(iptNota3.value);
 
-        var aluno = {
-            nome: nome,
-            nota1: nota1,
-            nota2: nota2,
-            nota3: nota3
-        }
 
         // vt_nomes.push(nome);
         // vt_nota1.push(nota1);
@@ -53,5 +50,3 @@
         console.log(aluno);
 
     }
-
-</script>

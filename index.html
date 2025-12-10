@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <title>Cadastro de Notas</title>
 </head>
 
 <body>
@@ -12,18 +13,30 @@
 
     Digite aqui o nome do aluno: <br>
     <input type="text" id="iptNome"> <br>
+
     Nota 1: <br>
     <input type="text" id="iptNota1"> <br>
+    <input type="number" id="iptNota1"> <br>
+
     Nota 2: <br>
     <input type="text" id="iptNota2"> <br>
+    <input type="number" id="iptNota2"> <br>
+
     Nota 3: <br>
     <input type="text" id="iptNota3"> <br>
     <button onclick="cadastrar()">Cadastrar</button> <br>
     <button onclick="listar()">Listar</button>
-    <button onclick="media()">Media</button>
+    <input type="number" id="iptNota3"> <br><br>
 
     <div id="listar"></div>
+    <button onclick="cadastrar()">Cadastrar</button>
+    <button onclick="listar()">Listar</button>
+    <button onclick="buscarAluno()">Aluno</button>
+    <button onclick="media()">Média</button>
+    <button onclick="buscarNotaMaior()">Notas Maior Que</button>
 
+    <div id="erros" style="color:red; margin-top:10px;"></div>
+    <div id="saida" style="margin-top:15px;"></div>
 </body>
 
 </html>
